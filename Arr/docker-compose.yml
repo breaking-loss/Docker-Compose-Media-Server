@@ -1,0 +1,87 @@
+services:
+
+  prowlarr:
+    container_name: prowlarr
+    image: ghcr.io/hotio/prowlarr
+    ports:
+      - "9696:9696"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/India
+      - UMASK=002
+    volumes:
+      - D:\Docker\Appdata\Prowlarr:/config
+      - D:\Media:/data
+      
+  radarr:
+    container_name: radarr
+    image: ghcr.io/hotio/radarr:latest
+    ports:
+      - "7878:7878"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia\India
+      - UMASK=002
+    volumes:
+      - D:\Docker\Appdata\Radarr:/config
+      - D:\Media:/data
+      
+  sonarr:
+    container_name: sonarr
+    image: ghcr.io/hotio/sonarr:latest
+    ports:
+      - "8989:8989"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/India
+      - UMASK=002
+    volumes:
+      - D:\Docker\Appdata\Sonarr:/config
+      - D:\Media:/data
+     
+  bazarr:
+    container_name: bazarr
+    image: ghcr.io/hotio/bazarr:latest
+    ports:
+      - "6767:6767"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - UMASK=002
+    volumes:
+      - D:\Docker\Appdata\Bazarr:/config
+      - D:\Media\Media:/data/media
+     
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    ports:
+      - '7575:7575'
+    volumes:
+      - D:\Docker\Appdata\Homarr\configs:/app/data/configs
+      - D:\Docker\Appdata\Homarr\icons:/app/public/icons
+      - D:\Docker\Appdata\Homarr\data:/app/data/data
+        
+  qbittorrent:
+    container_name: qbittorrent
+    image: ghcr.io/hotio/qbittorrent
+    ports:
+      - "8080:8080"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - UMASK=002
+      - WEBUI_PORTS=8080/tcp,8080/udp
+    volumes:
+      - D:\Docker\Appdata\Qbit:/config
+      - D:\Media\Torrents:/data
+
+networks:
+  proxynet:
+ 
